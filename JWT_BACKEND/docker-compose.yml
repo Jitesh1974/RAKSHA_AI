@@ -1,0 +1,81 @@
+services:
+  api:
+    build: .
+    env_file: .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      llm:
+        condition: service_started
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/health/live"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks: [raksha]
+
+  llm:
+    image: ghcr.io/ggml-org/llama.cpp:server-cuda
+    gpus: all
+    environment:
+      NVIDIA_VISIBLE_DEVICES: all
+    volumes:
+      - ./models:/models:ro
+    command: ["-m", "/models/qwen-model.gguf", "--host", "0.0.0.0", "--port", "8080", "-ngl", "99"]
+    restart: unless-stopped
+    networks: [raksha]
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks: [raksha]
+
+  neo4j:
+    image: neo4j:5.27-community
+    environment:
+      NEO4J_AUTH: ${NEO4J_AUTH}
+      NEO4J_server_default__listen__address: 0.0.0.0
+    volumes:
+      - neo4j_data:/data
+    restart: unless-stopped
+    networks: [raksha]
+
+  caddy:
+    image: caddy:2.9-alpine
+    depends_on:
+      api:
+        condition: service_healthy
+    environment:
+      RAKSHA_DOMAIN: ${RAKSHA_DOMAIN:?Set RAKSHA_DOMAIN in .env}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./docker/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    restart: unless-stopped
+    networks: [raksha]
+
+volumes:
+  postgres_data:
+  neo4j_data:
+  caddy_data:
+  caddy_config:
+
+networks:
+  raksha:
+    driver: bridge

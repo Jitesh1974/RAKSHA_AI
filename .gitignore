@@ -1,0 +1,42 @@
+# =========================
+# Python / Backend
+# =========================
+JWT_BACKEND/.venv/
+JWT_BACKEND/venv/
+JWT_BACKEND/__pycache__/
+JWT_BACKEND/**/*.pyc
+JWT_BACKEND/.pytest_cache/
+
+# Environment / secrets
+JWT_BACKEND/.env
+JWT_BACKEND/.env.*
+!JWT_BACKEND/.env.example
+JWT_BACKEND/current-api.env
+
+# Logs
+JWT_BACKEND/**/*.log
+
+# =========================
+# Android / Frontend
+# =========================
+FRONTEND_APP/.gradle/
+FRONTEND_APP/**/build/
+FRONTEND_APP/local.properties
+FRONTEND_APP/*.apk
+FRONTEND_APP/*.aab
+
+# Android Studio
+FRONTEND_APP/.idea/
+FRONTEND_APP/**/*.iml
+
+# =========================
+# General
+# =========================
+.DS_Store
+Thumbs.db
+
+# Models / large files
+*.gguf
+*.bin
+*.safetensors
+models/

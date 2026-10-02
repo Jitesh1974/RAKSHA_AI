@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#07111F</color>
+    <color name="surface">#0D1B2A</color>
+    <color name="card_background">#101F30</color>
+    <color name="inner_surface">#0A1725</color>
+    <color name="card_stroke">#1B3146</color>
+    <color name="primary">#4DD7FF</color>
+    <color name="primary_container">#123348</color>
+    <color name="secondary">#8CB9D2</color>
+    <color name="on_primary">#031017</color>
+    <color name="on_surface">#F3F7FA</color>
+    <color name="text_primary">#E7EFF4</color>
+    <color name="text_secondary">#9FB4C3</color>
+    <color name="text_muted">#6E8696</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="risk_low">#2DBE8C</color>
+    <color name="risk_medium">#E7B84B</color>
+    <color name="risk_high">#FF6B6B</color>
+    <color name="risk_failed">#B7C4CD</color>
+    <color name="risk_pending">#5FB7D4</color>
+    <color name="on_risk_badge">#FFFFFF</color>
+    <color name="on_risk_medium">#1D1605</color>
+    <color name="warning_surface">#342713</color>
+    <color name="warning_stroke">#6E5524</color>
+    <color name="on_warning">#F5DEAD</color>
+    <color name="purple_500">#4DD7FF</color>
+    <color name="teal_200">#8CEBFF</color>
+        <color name="chip_text">#DFF7FF</color>
+</resources>

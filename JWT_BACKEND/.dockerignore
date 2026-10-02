@@ -1,0 +1,13 @@
+.env
+.env.*
+.git
+.gitignore
+__pycache__
+*.pyc
+.pytest_cache
+.venv
+venv
+models/*.gguf
+models/*.bin
+models/*.safetensors
+*.log

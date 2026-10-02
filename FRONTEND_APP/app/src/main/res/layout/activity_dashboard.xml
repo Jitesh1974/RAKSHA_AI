@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:id="@+id/dashboardRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="32dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:minHeight="72dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="12dp"
+            app:logo="@drawable/ic_shield"
+            app:logoDescription="@string/security_logo_desc"
+            app:title="@string/app_name"
+            app:subtitle="@string/dashboard_subtitle"
+            app:titleTextColor="@color/white"
+            app:subtitleTextColor="@color/text_secondary" />
+
+        <LinearLayout
+            android:id="@+id/accessBanner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_warning_card"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/notification_access_required"
+                android:textColor="@color/on_warning"
+                android:textSize="14sp" />
+            <Button
+                android:id="@+id/enableAccessButton"
+                style="@style/Widget.RakshaAI.Button.Compact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/open_notification_settings" />
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/protectionCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/card_background"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/card_stroke"
+            app:strokeWidth="1dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:background="@drawable/bg_shield_circle"
+                        android:contentDescription="@string/security_logo_desc"
+                        android:padding="12dp"
+                        android:src="@drawable/ic_shield" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/protectionStatusText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/protection_needs_access"
+                            android:textColor="@color/white"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/protection_summary_short"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/card_stroke" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+                    <LinearLayout style="@style/DashboardStatBox">
+                        <TextView android:id="@+id/totalCountText" style="@style/DashboardStatValue" android:text="0" />
+                        <TextView style="@style/DashboardStatLabel" android:text="@string/count_total" />
+                    </LinearLayout>
+                    <LinearLayout style="@style/DashboardStatBox">
+                        <TextView android:id="@+id/pendingCountText" style="@style/DashboardStatValue" android:text="0" android:textColor="@color/risk_pending" />
+                        <TextView style="@style/DashboardStatLabel" android:text="@string/count_pending" />
+                    </LinearLayout>
+                    <LinearLayout style="@style/DashboardStatBox">
+                        <TextView android:id="@+id/highRiskCountText" style="@style/DashboardStatValue" android:text="0" android:textColor="@color/risk_high" />
+                        <TextView style="@style/DashboardStatLabel" android:text="@string/count_high_risk" />
+                    </LinearLayout>
+                    <LinearLayout style="@style/DashboardStatBox">
+                        <TextView android:id="@+id/failedCountText" style="@style/DashboardStatValue" android:text="0" android:textColor="@color/risk_failed" />
+                        <TextView style="@style/DashboardStatLabel" android:text="@string/count_failed" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/historyButton"
+                style="@style/Widget.RakshaAI.Button.Secondary"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:text="@string/open_history" />
+            <Button
+                android:id="@+id/settingsButton"
+                style="@style/Widget.RakshaAI.Button.Secondary"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:text="@string/open_settings" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/recent_threats"
+            android:textColor="@color/white"
+            android:textSize="19sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/recent_threats_summary"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/eventsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:nestedScrollingEnabled="false"
+            android:paddingHorizontal="16dp"
+            android:scrollbars="none" />
+
+        <LinearLayout
+            android:id="@+id/emptyStateView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="28dp"
+            android:visibility="gone">
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:contentDescription="@string/security_logo_desc"
+                android:src="@drawable/ic_empty_state" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:gravity="center"
+                android:text="@string/dashboard_empty_title"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:gravity="center"
+                android:text="@string/dashboard_empty_state"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
